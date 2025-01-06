@@ -1,4 +1,4 @@
-name: nodejs_blog_practica
+name: node_js_blog_practica
 
 on:
   push:
