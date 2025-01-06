@@ -16,3 +16,7 @@ Después de solucionar estos errores ya hemos llegado al final del apartado del 
 4. Crear repositorio remoto, y hacer lo pertinente para que apunte este repositorio a nuestro nuevo repositorio
 
 
+
+
+RESULTAT DELS ÚLTIMS TESTS
+![Tested with Cypress](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
