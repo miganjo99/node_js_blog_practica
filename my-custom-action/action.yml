@@ -1,4 +1,4 @@
-name: 'Bagde_action'
+name: 'Badge_action'
 description: 'Add badge to README'
 inputs:
   ejemplo_input:

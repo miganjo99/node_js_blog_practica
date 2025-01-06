@@ -68,6 +68,6 @@ jobs:
         run: echo "::set-output name=cypress_outcome::$(cat result.txt)"
 
       - name: Modificar README con badge
-        uses: action.yml
+        uses: ./my-custom-action/action.yml
         with:
           result: ${{ steps.result.outputs.cypress_outcome }}    
