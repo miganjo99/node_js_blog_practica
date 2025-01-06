@@ -65,9 +65,17 @@ jobs:
 
       - name: Generar resultado de Cypress
         id: result
-        run: echo "::set-output name=cypress_outcome::$(cat result.txt)"
+        run: echo "result=$(cat result.txt)" >> $GITHUB_ENV
 
       - name: Modificar README con badge
         uses: ./my-custom-action
         with:
-          result: ${{ steps.result.outputs.cypress_outcome }}    
+          result: ${{ env.result }}
+
+      - name: Publicar cambios en README.md
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m "Actualizar badge en README.md según resultados de tests"
+          git push 
