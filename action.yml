@@ -1,0 +1,10 @@
+name: 'Bagde_action'
+description: 'Add badge to README'
+inputs:
+  ejemplo_input:
+    description: 'test'
+    required: true
+    default: 'success'
+runs:
+  using: 'node20'
+  main: 'index.js'
