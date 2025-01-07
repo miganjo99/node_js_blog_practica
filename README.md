@@ -20,3 +20,6 @@ Después de solucionar estos errores ya hemos llegado al final del apartado del 
 
 RESULTAT DELS ÚLTIMS TESTS
 ![Tested with Cypress](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
+
+Resultats dels tests:
+![Test Failure](https://img.shields.io/badge/test-failure-red)
