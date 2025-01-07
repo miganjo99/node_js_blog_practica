@@ -72,7 +72,7 @@ jobs:
       - name: Modificar README con badge
         uses: ./my-custom-action
         with:
-          result: ${{ env.result }}
+          result: ${{ steps.result.outputs.result }}
 
       - name: Publicar cambios en README.md
         run: |

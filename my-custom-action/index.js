@@ -22,7 +22,7 @@ async function main() {
     let readmeContent = await fs.readFile(readmePath, "utf-8");
 
     // Buscar el marcador donde agregar el badge
-    const badgeMarker = "RESULTAT DELS ÚLTIMS TESTS";
+    const badgeMarker = "Resultats dels tests:";
     const badgeRegex = new RegExp(`(${badgeMarker})(.*)`, "s");
 
     // Actualizar el contenido con el badge
