@@ -81,3 +81,20 @@ jobs:
           git add README.md
           git commit -m "Actualizar badge en README.md según resultados de tests"
           git push 
+
+  Deploy_job:
+    runs-on: ubuntu-latest
+    needs: Cypress_job 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20 
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Token de acceso a Vercel
+          vercel-args: "--prod" # Despliegue en producción
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # ID de la organización
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # ID del proyecto en Vercel
+  
