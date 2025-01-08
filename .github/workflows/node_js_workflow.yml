@@ -38,14 +38,12 @@ jobs:
       - name: Iniciar servidor
         run: npm start & 
 
-      - name: Esperar a que el servidor esté disponible
-        run: npx wait-on http://localhost:3000 
-
-      - name: Ejecutar Cypress
-        uses: cypress-io/github-action@v5
+      - name: Ejevutar Cypress 
+        uses: cypress-io/github-action@v6
         with:
-          install: false
-          runTests: true
+          start: npm run start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 60
         continue-on-error: true
 
       - name: Guardar resultado de Cypress
