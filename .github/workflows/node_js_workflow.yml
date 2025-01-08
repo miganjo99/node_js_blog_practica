@@ -35,6 +35,12 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Iniciar servidor
+        run: npm start & 
+
+      - name: Esperar a que el servidor esté disponible
+        run: npx wait-on http://localhost:3000 
+
       - name: Ejecutar Cypress
         uses: cypress-io/github-action@v5
         with:
@@ -53,6 +59,7 @@ jobs:
           name: cypress-result
           path: result.txt
 
+  
   Add_badge_job:
     runs-on: ubuntu-latest
     needs: Cypress_job
@@ -72,15 +79,15 @@ jobs:
       - name: Modificar README con badge
         uses: ./my-custom-action
         with:
-          result: ${{ steps.result.outputs.result }}
-
+          result: ${{ env.result }}
+      
       - name: Publicar cambios en README.md
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add README.md
-          git commit -m "Actualizar badge en README.md según resultados de tests"
-          git push 
+          git diff --quiet && git diff --staged --quiet || (git add README.md && git commit -m "Actualizar badge en README.md según resultados de tests")
+          git push
+        
 
   Deploy_job:
     runs-on: ubuntu-latest
