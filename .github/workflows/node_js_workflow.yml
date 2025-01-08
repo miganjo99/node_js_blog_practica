@@ -38,7 +38,7 @@ jobs:
       - name: Iniciar servidor
         run: npm start & 
 
-      - name: Ejevutar Cypress 
+      - name: Ejecutar Cypress 
         uses: cypress-io/github-action@v6
         with:
           start: npm run start
