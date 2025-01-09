@@ -102,4 +102,31 @@ jobs:
           vercel-args: "--prod" # Despliegue en producción
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # ID de la organización
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # ID del proyecto en Vercel
+    
+  Notification_job:
+    runs-on: ubuntu-latest
+    if: always() 
+    steps:
+      - name: Enviar notificación por correo
+        uses: tj-actions/send-email@v1.11
+        with:
+          server_address: smtp.gmail.com 
+          server_port: 587 
+          username: ${{ secrets.SMTP_USERNAME }} 
+          password: ${{ secrets.SMTP_PASSWORD }} 
+          subject: "Resultado del Workflow"
+          body: |
+            Hola,
+            
+            Aquí tienes los resultados del workflow ejecutado:
+            - Linter_job: ${{ needs.linter_job.result }}
+            - Cypress_job: ${{ needs.Cypress_job.result }}
+            - Add_badge_job: ${{ needs.Add_badge_job.result }}
+            - Deploy_job: ${{ needs.Deploy_job.result }}
+            
+            Saludos,
+            GitHub Actions
+          to: ${{ secrets.EMAIL_TO }} 
+          from: ${{ secrets.SMTP_USERNAME }} 
+
   
