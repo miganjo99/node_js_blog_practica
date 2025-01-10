@@ -120,4 +120,4 @@ RESULTAT DELS ÚLTIMS TESTS
 ![Tested with Cypress](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
 
 Resultats dels tests:
-![Tested with Cypress](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
+![Tested with Cypress](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)![Metrics](./github-metrics.svg)
