@@ -1,5 +1,8 @@
 # Pràctica - GitHub Actions
 Miguel Gandia Jorda
+Mi URL de Vercel: [Vercel Deployment](https://vercelactions-9pm4joyk2-miguels-projects-51c469f1.vercel.app/)
+
+
 
 ### 1. Clonamos el github.
 ### 2. Instalamos node
@@ -26,8 +29,7 @@ Creamos la configuración del workflow del proyecto:
 
 ### JOB_LINTER
 **linter_job**: Este job se encarga de verificar la calidad del código mediante un linter. Al hacer un `push` al repositorio, se instalan las dependencias del proyecto y luego se ejecuta el comando `npm run lint`. Este proceso analiza el código JavaScript para identificar errores de sintaxis y de estilo, y asegura que el código cumpla con los estándares definidos. Si se encuentran errores, se muestran en los logs de la acción.
-
-(./img/image5.png)
+![Image](./img/image5.png)
 
 ### 6.  Apartado Cypress_job
 **cypress_job**: El `Cypress_job` ejecuta pruebas automatizadas de extremo a extremo utilizando Cypress. Este job primero instala las dependencias necesarias y luego inicia el servidor de la aplicación. A continuación, ejecuta las pruebas en un entorno controlado. Durante la ejecución, se espera a que el servidor esté disponible en el puerto 3000. Al finalizar las pruebas, se guardan los resultados en un archivo `result.txt` y se sube como artefacto para su posterior consulta.
@@ -35,7 +37,7 @@ Creamos la configuración del workflow del proyecto:
 
 Añadimos esto al archivo, para hacer el checkout, la instalación y la ejecución:
 
-(./img/image7.png)
+![Image](./img/image7.png)
 (Aquí faltaba añadir que se expone en el puerto 3000):
 ```yaml
 - name: Ejecutar Cypress 
@@ -48,7 +50,7 @@ Añadimos esto al archivo, para hacer el checkout, la instalación y la ejecuci�
 ```
 En este caso preparamos el archivo para que guarde los resultados en un archivo result.txt.
 
-(./img/image8.png)
+![Image](./img/image8.png)
 
 Como podemos observar, funciona correctamente.
 
@@ -60,7 +62,7 @@ Como podemos observar, funciona correctamente.
 
 En este caso, hemos creado los diferentes steps que se piden en la práctica. Los primeros steps no tienen mucha dificultad, pero para los últimos hemos creado una carpeta donde guardamos un archivo YAML, en este caso action.yml, el cual utilizamos para modificar el README y escribir el resultado del test mediante JS. Y en el último step, realizamos el commit.
 
-(./img/image9.png)
+![Image](./img/image9.png)
 
 
 ### 8. Apartado Deploy_job
@@ -75,7 +77,7 @@ Nos logeamos desde la terminal bash.
 
 Es importante guardar estos secretos en nuestro repositorio desde el entorno de GitHub.
 
-(./img/image10.png)
+![Image](./img/image10.png)
 
 
  - Los tokens se generaron al vincular Vercel con el repositorio local, lo que genera un archivo JSON con los secretos de la organización y del proyecto. El otro token debe generarse desde la web de Vercel y vincularse a nuestra organización en Vercel. Finalmente, realizamos el push.
@@ -84,7 +86,7 @@ Es importante guardar estos secretos en nuestro repositorio desde el entorno de 
 
 Y como puedes observar, he cambiado la página.
 
-(./img/image11.png)
+![Image](./img/image11.png)
 
 
 ### 9. Apartado Notification_job
@@ -96,7 +98,7 @@ Estos serían mis secretos para la notificación:
 
  - (job.status) -> string -> Estado actual del trabajo. Los valores posibles son success, failure o cancelled.
  - La finalidad es enviar un correo con el resultado de los trabajos anteriores, y este es el correo que he recibido.
-(./img/image12.png)
+![Image](./img/image12.png)
 Luego me di cuenta de algo bastante obvio: este job de notificación necesita que los trabajos anteriores hayan terminado. Es decir, debe depender de esos trabajos, por lo que se debe poner esto:
 
 needs: [linter_job, cypress_job, deploy_job]
@@ -108,12 +110,12 @@ Configuramos la ejecución del job, generamos las métricas, especificamos algun
 
 Esta sería la idea principal mediante la métrica de lowlighter, y empleamos un token de acceso personal a nuestro GitHub.
 
-(./img/image14.png)
+![Image](./img/image14.png)
  - Generamos un token de acceso personal de GitHub.
  - Añadimos este token como secreto del repositorio con el nombre de METRICS_TOKEN.
  - Finalmente, el workflow final de la práctica quedaría de esta manera:
 
-(./img/image13.png)
+![Image](./img/image13.png)
 
 
 RESULTAT DELS ÚLTIMS TESTS
