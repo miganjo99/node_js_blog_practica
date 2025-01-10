@@ -105,6 +105,7 @@ jobs:
     
   Notification_job:
     runs-on: ubuntu-latest
+    needs: [linter_job, Cypress_job, Add_badge_job, Deploy_job]
     steps:
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
@@ -116,28 +117,46 @@ jobs:
           subject: "Resultado del workflow"
           body: |
             Resultado de los jobs:
-            - Linter_job: ${{ job.status }}
-            - Cypress_job: ${{ job.status }}
-            - Add_badge_job: ${{ job.status }}
-            - Deploy_job: ${{ job.status }}
+            - Linter_job: ${{ needs.linter_job.result }}
+            - Cypress_job: ${{ needs.Cypress_job.result }}
+            - Add_badge_job: ${{ needs.Add_badge_job.result }}
+            - Deploy_job: ${{ needs.Deploy_job.result }}
           to: miguelgandiajorda@gmail.com
           from: mgandia1999@gmail.com
+        
+
   github-metricas:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - uses: lowlighter/metrics@latest
         with:
-          token: ${{ secrets.METRICS_TOKEN }}  
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: miganjo99
+          template: classic
+          base: header, activity
+          config_timezone: Europe/Madrid
+          plugin_languages: yes
+          plugin_languages_sections: most-used
+          plugin_languages_indepth: yes
+          plugin_languages_recent_load: 20
+          plugin_languages_recent_days: 14
 
-      - name: Agregar metricas al README
+      - name: Actualizar README.md con metricas
+        run: echo "![Metrics](./github-metrics.svg)" >> README.md
+
+      # Subir cambios a GitHub
+      - name: Subir cambios al repositorio
         run: |
-          echo "![Metrics](./github-metrics.svg)" >> README.md
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit -m "Actualizar metricas en README.md"
+          git commit -m "Actualizar metricas del README.md"
           git push
+
   
   
