@@ -10,9 +10,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">Bienvenido a Despligue WEB!</h1>
+        <h1 className="title">Bienvenido a Despliegue WEB!</h1>
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Miguel Gandia Jorda 2nDAW_Semi <code>pages/index.js</code>
         </p>
 
         <div className="grid">
